@@ -481,4 +481,109 @@ small {
     border-top: 1px solid var(--border-subtle);
     height: calc(55vh - 10px);
   }
+
+}
+
+
+/* ===========================
+   RESPONSIVE — Mejor legibilidad en móvil
+=========================== */
+
+@media (max-width: 900px) {
+
+  /* Texto general más grande */
+  body,
+  #sidebar,
+  small {
+    font-size: 15px;
+  }
+
+  h2 {
+    font-size: 15px;
+    margin-top: 18px;
+    margin-bottom: 10px;
+  }
+
+  /* Mapa más cómodo */
+  #map {
+    height: 50vh;   /* un poco más grande */
+  }
+
+  /* Buscador */
+  #search-container {
+    padding: 14px;
+  }
+
+  #search-input {
+    padding: 12px 14px;
+    font-size: 16px;
+    border-radius: 14px;
+  }
+
+  #search-btn,
+  #clear-search-btn {
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  /* Tarjetas: resultados, paradas, plan */
+  .search-result,
+  .place-item,
+  .plan-item {
+    padding: 14px 16px;
+    margin-bottom: 12px;
+    font-size: 15px;
+    border-radius: 14px;
+  }
+
+  .search-result strong,
+  .place-item strong,
+  .plan-item strong {
+    font-size: 16px;
+  }
+
+  .search-result small,
+  .place-item small,
+  .plan-item small {
+    font-size: 14px;
+  }
+
+  /* Botones dentro de tarjetas */
+  .search-result button,
+  .place-item button,
+  .plan-item button {
+    padding: 8px 14px;
+    font-size: 14px;
+    border-radius: 12px;
+    margin-top: 8px;
+  }
+
+  /* Botón generar plan */
+  #generate-plan-btn {
+    padding: 14px;
+    font-size: 15px;
+    border-radius: 14px;
+    margin-top: 12px;
+  }
+
+  /* Panel de detalles */
+  #details-container {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  #details-pretty dt {
+    font-size: 15px;
+  }
+
+  #details-pretty dd {
+    font-size: 14px;
+  }
+
+  #details-raw {
+    font-size: 13px;
+    max-height: 260px;
+    border-radius: 14px;
+    padding: 12px;
+  }
 }
