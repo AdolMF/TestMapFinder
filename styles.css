@@ -1,0 +1,484 @@
+/* ---------------------------
+   Paleta tonos tierra oscuros
+---------------------------- */
+
+:root {
+  --bg-page: #12100e;
+  --bg-sidebar: #1c1917;
+  --bg-card: #25201c;
+  --bg-muted: #292524;
+  --border-subtle: #3f3f46;
+  --border-strong: #52525b;
+  --accent: #f97316;         /* naranja tierra */
+  --accent-soft: rgba(249, 115, 22, 0.15);
+  --accent-strong: #ea580c;
+  --accent-alt: #22c55e;     /* verde suave */
+  --text-main: #f5f5f4;
+  --text-muted: #a8a29e;
+  --text-soft: #78716c;
+  --danger: #f97373;
+  --radius: 10px;
+  --radius-lg: 12px;
+  --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* ---------------------------
+   Reset y layout base
+---------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  height: 100vh;
+  font-family: var(--font-main);
+  background: #0b0a09;
+  color: var(--text-main);
+  overflow: hidden;
+}
+
+/* Mientras se arrastra, desactivar selección de texto */
+body.resizing {
+  cursor: col-resize;
+  user-select: none;
+}
+
+/* ---------------------------
+   Mapa + Sidebar + Divisor
+---------------------------- */
+
+#map {
+  flex: 2;
+  height: 100vh;
+}
+
+/* Divisor vertical arrastrable */
+
+#divider {
+  width: 6px;
+  background: #292524;
+  cursor: col-resize;
+  border-left: 1px solid #3f3f46;
+  border-right: 1px solid #3f3f46;
+}
+
+/* Sidebar */
+
+#sidebar {
+  flex: 1;
+  min-width: 260px;
+  max-width: 60vw;
+  padding: 14px 14px 18px;
+  overflow-y: auto;
+  background: #1c1917;
+  border-left: 1px solid var(--border-subtle);
+}
+
+/* Scrollbar sidebar */
+
+#sidebar::-webkit-scrollbar {
+  width: 7px;
+}
+#sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+#sidebar::-webkit-scrollbar-thumb {
+  background: #44403c;
+  border-radius: 999px;
+}
+
+/* ---------------------------
+   Textos y separadores
+---------------------------- */
+
+h2 {
+  margin: 14px 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+hr {
+  border: none;
+  border-top: 1px solid rgba(63, 63, 70, 0.8);
+  margin: 14px 0;
+}
+
+small {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* ---------------------------
+   Buscador
+---------------------------- */
+
+#search-container {
+  margin-bottom: 12px;
+  padding: 10px;
+  border-radius: var(--radius-lg);
+  background: #292524;
+  border: 1px solid rgba(68, 64, 60, 0.9);
+}
+
+#search-input {
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  border-radius: 999px;
+  border: 1px solid #44403c;
+  background: #1c1917;
+  color: var(--text-main);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.15s ease-out, background 0.15s ease-out;
+}
+
+#search-input::placeholder {
+  color: var(--text-soft);
+}
+
+#search-input:focus {
+  border-color: var(--accent);
+  background: #111827;
+}
+
+#search-btn {
+  width: 100%;
+  padding: 8px;
+  border-radius: 999px;
+  border: none;
+  background: var(--accent);
+  color: #0b0a09;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background 0.15s ease-out, transform 0.1s ease-out;
+}
+
+#search-btn:hover {
+  background: var(--accent-strong);
+}
+
+#search-btn:active {
+  transform: translateY(1px);
+}
+
+#clear-search-btn {
+  width: 100%;
+  margin-top: 6px;
+  padding: 7px;
+  border-radius: 999px;
+  border: 1px solid #44403c;
+  background: #1c1917;
+  color: var(--text-muted);
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s ease-out, border-color 0.15s ease-out;
+}
+
+#clear-search-btn:hover {
+  background: rgba(249, 115, 22, 0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+
+/* ---------------------------
+   Listas (resultados / paradas / plan)
+---------------------------- */
+
+#search-results,
+#places-list,
+#plan-list {
+  margin-top: 10px;
+}
+
+/* Cards base */
+
+.search-result,
+.place-item,
+.plan-item {
+  position: relative;
+  border-radius: var(--radius);
+  border: 1px solid rgba(63, 63, 70, 0.9);
+  background: #25201c;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  transition: border-color 0.12s ease-out, background 0.12s ease-out;
+}
+
+.search-result:hover,
+.place-item:hover,
+.plan-item:hover {
+  border-color: rgba(249, 115, 22, 0.6);
+  background: #292524;
+}
+
+.search-result strong,
+.place-item strong,
+.plan-item strong {
+  font-size: 13px;
+}
+
+.search-result small,
+.place-item small,
+.plan-item small {
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+/* ---------------------------
+   Botones dentro de cards
+---------------------------- */
+
+.place-item button,
+.plan-item button,
+.search-result button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 9px;
+  margin-top: 6px;
+  margin-right: 4px;
+  border-radius: 999px;
+  border: 1px solid rgba(63, 63, 70, 0.9);
+  background: #1c1917;
+  color: var(--text-main);
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.12s ease-out, border-color 0.12s ease-out,
+    color 0.12s ease-out;
+}
+
+/* Botones de acción principales */
+
+.place-item button.focus-btn,
+.search-result .search-focus-btn {
+  border-color: rgba(249, 115, 22, 0.6);
+}
+
+/* Botones de detalles */
+
+.place-item button.details-btn,
+.plan-item button.plan-details-btn,
+.search-result .search-details-btn {
+  border-style: dashed;
+  border-color: rgba(82, 82, 91, 0.9);
+}
+
+/* Hover genérico */
+
+.place-item button:hover,
+.plan-item button:hover,
+.search-result button:hover {
+  background: rgba(249, 115, 22, 0.15);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* Botón eliminar en tonos rojos tierra */
+
+.place-item .delete-btn {
+  border-color: rgba(248, 113, 113, 0.7);
+  color: #fecaca;
+}
+
+.place-item .delete-btn:hover {
+  background: rgba(127, 29, 29, 0.6);
+  border-color: #f87171;
+  color: #fee2e2;
+}
+
+/* ---------------------------
+   Botón "Generar plan"
+---------------------------- */
+
+#generate-plan-btn {
+  margin-top: 8px;
+  padding: 9px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 999px;
+  border: 1px solid rgba(34, 197, 94, 0.8);
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  color: #052e16;
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: background 0.15s ease-out, transform 0.1s ease-out;
+}
+
+#generate-plan-btn:hover {
+  background: #16a34a;
+}
+
+#generate-plan-btn:active {
+  transform: translateY(1px);
+}
+
+/* ---------------------------
+   Detalles del destino
+---------------------------- */
+
+#details-container {
+  margin-top: 10px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(63, 63, 70, 0.8);
+  background: #292524;
+  padding: 9px 10px 10px;
+}
+
+#details-pretty h3 {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-soft);
+}
+
+#details-pretty dl {
+  margin: 0;
+}
+
+#details-pretty dt {
+  font-weight: 600;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--text-main);
+}
+
+#details-pretty dd {
+  margin: 0 0 2px 0;
+  padding-left: 4px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* JSON crudo */
+
+#details-raw {
+  margin-top: 8px;
+  background: #111827;
+  padding: 8px;
+  border-radius: 8px;
+  max-height: 220px;
+  overflow: auto;
+  font-size: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  color: #e5e7eb;
+  border: 1px solid #020617;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Scrollbar JSON */
+
+#details-raw::-webkit-scrollbar {
+  width: 6px;
+}
+#details-raw::-webkit-scrollbar-track {
+  background: transparent;
+}
+#details-raw::-webkit-scrollbar-thumb {
+  background: #4b5563;
+  border-radius: 999px;
+}
+
+/* ---------------------------
+   Leaflet (mapa & popups)
+---------------------------- */
+
+.leaflet-control-attribution {
+  background: rgba(15, 23, 42, 0.95) !important;
+  color: var(--text-soft) !important;
+  border-radius: 999px;
+  padding: 2px 8px !important;
+  margin: 0 6px 6px 0 !important;
+  border: 1px solid rgba(63, 63, 70, 0.9);
+  font-size: 11px;
+}
+
+.leaflet-popup-content-wrapper {
+  background: #1f2933;
+  color: var(--text-main);
+  border-radius: 10px;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+}
+
+.leaflet-popup-tip {
+  background: #1f2933;
+  border: 1px solid rgba(55, 65, 81, 0.9);
+}
+
+.leaflet-popup-content {
+  font-size: 12px;
+}
+
+.leaflet-popup-content button {
+  margin-top: 6px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  border: 1px solid rgba(249, 115, 22, 0.8);
+  background: #111827;
+  color: var(--accent);
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.12s ease-out, border-color 0.1s ease-out;
+}
+
+.leaflet-popup-content button:hover {
+  background: rgba(249, 115, 22, 0.15);
+  border-color: var(--accent-strong);
+}
+
+
+/* ===========================
+   RESPONSIVE: pantallas estrechas
+   - Mapa arriba
+   - Sidebar debajo
+   - Sin divisor
+=========================== */
+
+@media (max-width: 1000px) {
+  body {
+    flex-direction: column;
+  }
+
+  #map {
+    flex: 0 0 45vh; /* mapa más bajo */
+    width: 100%;
+    height: 45vh;
+  }
+
+  #divider {
+    display: none;
+  }
+
+  #sidebar {
+    flex: 1 1 auto;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--border-subtle);
+    height: calc(55vh - 10px);
+  }
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Planificador de viaje</title>
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Layout principal: mapa + divisor + panel derecho -->
+  <div id="map"></div>
+  <div id="divider"></div>
+
+  <div id="sidebar">
+    <!-- BUSCADOR -->
+<div id="search-container">
+  <input type="text" id="search-input" placeholder="Buscar lugar...">
+  <button id="search-btn">Buscar</button>
+  <button id="clear-search-btn" class="clear-btn">Limpiar resultados</button>
+  <div id="search-results"></div>
+</div>
+
+
+    <!-- PARADAS SELECCIONADAS -->
+    <h2>Paradas seleccionadas</h2>
+    <div id="places-list"></div>
+    <button id="generate-plan-btn">Generar plan de viaje</button>
+
+    <hr />
+
+    <!-- PLAN RECOMENDADO -->
+    <h2>Plan recomendado</h2>
+    <div id="plan-list"></div>
+
+    <hr />
+
+    <!-- DETALLES DE DESTINO -->
+    <h2>Detalles del destino</h2>
+    <div id="details-container">
+      <div id="details-pretty"></div>
+      <pre id="details-raw"></pre>
+    </div>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+
+  <!-- Lógica del mapa y la app -->
+  <script src="app.js"></script>
+</body>
+</html>
